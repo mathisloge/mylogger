@@ -1,0 +1,7 @@
+{
+    "name": "mylogger",
+    "version-string": "master",
+    "dependencies": [
+        "spdlog"
+    ]
+}
