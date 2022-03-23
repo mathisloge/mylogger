@@ -40,11 +40,11 @@ configure_package_config_file(myloggerConfig.cmake.in
   INSTALL_DESTINATION "${LIB_INSTALL_DIR}/mylogger/cmake"
 )
 write_basic_package_version_file(
-  ${CMAKE_CURRENT_BINARY_DIR}/myloggerConfigVersion.cmake
+  "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfigVersion.cmake"
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY SameMajorVersion
 )
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/myloggerConfig.cmake
-              ${CMAKE_CURRENT_BINARY_DIR}/myloggerConfigVersion.cmake
-        DESTINATION ${LIB_INSTALL_DIR}/mylogger/cmake 
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfig.cmake"
+              "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfigVersion.cmake"
+        DESTINATION "${LIB_INSTALL_DIR}/cmake/mylogger"
 )
