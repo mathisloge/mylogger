@@ -2,8 +2,8 @@
 #include <cstdint>
 #include <memory>
 #include <string>
-#include <mylogger_export.h>
 #include <spdlog/spdlog.h>
+#include "mylogger_export.h"
 namespace mylogger
 {
 using Logger = std::shared_ptr<spdlog::logger>;
