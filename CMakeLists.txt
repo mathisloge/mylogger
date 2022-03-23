@@ -30,21 +30,36 @@ if(BUILD_TESTING)
 endif()
 
 
+install(DIRECTORY include/ TYPE INCLUDE)
+
+install(TARGETS mylogger
+    EXPORT myloggerTargets
+)
+
+install(EXPORT myloggerTargets 
+    FILE myloggerTargets.cmake
+    DESTINATION lib/cmake/mylogger
+)
+
 include(CMakePackageConfigHelpers)
-
-install(TARGETS mylogger EXPORT myloggerTargets)
-install(DIRECTORY include TYPE INCLUDE)
-
-configure_package_config_file(myloggerConfig.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfig.cmake"
-  INSTALL_DESTINATION "${LIB_INSTALL_DIR}/mylogger/cmake"
+configure_package_config_file("myloggerConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfig.cmake"
+    INSTALL_DESTINATION "lib/cmake/mylogger"
 )
 write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfigVersion.cmake"
-  VERSION ${PROJECT_VERSION}
-  COMPATIBILITY SameMajorVersion
+    myloggerConfigVersion.cmake
+    VERSION ${PACKAGE_VERSION}
+    COMPATIBILITY AnyNewerVersion
 )
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfig.cmake"
-              "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfigVersion.cmake"
-        DESTINATION "${LIB_INSTALL_DIR}/cmake/mylogger"
+
+install(EXPORT myloggerTargets
+    FILE myloggerTargets.cmake
+    NAMESPACE mylogger::
+    DESTINATION lib/cmake/mylogger
+)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfigVersion.cmake"
+    DESTINATION lib/cmake/mylogger
 )
