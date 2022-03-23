@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
-project(mylogger LANGUAGES CXX)
+project(mylogger LANGUAGES CXX VERSION 1.0.0)
 include(CTest)
 include(GenerateExportHeader)
+include(GNUInstallDirs)
 
 find_package(spdlog CONFIG REQUIRED)
 
@@ -27,3 +28,23 @@ generate_export_header(mylogger)
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
+
+
+include(CMakePackageConfigHelpers)
+
+install(TARGETS mylogger EXPORT myloggerTargets)
+install(DIRECTORY include TYPE INCLUDE)
+
+configure_package_config_file(myloggerConfig.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/myloggerConfig.cmake"
+  INSTALL_DESTINATION "${LIB_INSTALL_DIR}/mylogger/cmake"
+)
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/myloggerConfigVersion.cmake
+  VERSION ${PROJECT_VERSION}
+  COMPATIBILITY SameMajorVersion
+)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/myloggerConfig.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/myloggerConfigVersion.cmake
+        DESTINATION ${LIB_INSTALL_DIR}/mylogger/cmake 
+)

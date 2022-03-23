@@ -1,0 +1,5 @@
+@PACKAGE_INIT@
+
+find_dependency(spdlog CONFIG REQUIRED)
+
+check_required_components(mylogger)
