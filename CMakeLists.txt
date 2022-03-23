@@ -31,6 +31,7 @@ endif()
 
 
 install(DIRECTORY include/ TYPE INCLUDE)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/mylogger_export.h" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/mylogger")
 
 install(TARGETS mylogger
     EXPORT myloggerTargets
